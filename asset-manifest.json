@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/infocrypto/static/css/main.ea8eccb9.css",
+    "main.js": "/infocrypto/static/js/main.f3d7b55d.js",
+    "static/media/cryptocurrency.png": "/infocrypto/static/media/cryptocurrency.1548aced3f0605895bac.png",
+    "index.html": "/infocrypto/index.html",
+    "main.ea8eccb9.css.map": "/infocrypto/static/css/main.ea8eccb9.css.map",
+    "main.f3d7b55d.js.map": "/infocrypto/static/js/main.f3d7b55d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea8eccb9.css",
+    "static/js/main.f3d7b55d.js"
+  ]
+}
