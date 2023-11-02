@@ -1,47 +1,60 @@
-import React from "react";
-import { Button, Menu, Typography, Avatar } from "antd";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  HomeOutlined,
-  MoneyCollectOutlined,
-  BulbOutlined,
-  FundOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import MenuIcon from "@mui/icons-material/Menu";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import HomeIcon from "@mui/icons-material/Home";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import icon from "../images/cryptocurrency.png";
-import Item from "antd/lib/list/Item";
-import MenuItem from "antd/lib/menu/MenuItem";
 
 const Navbar = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="nav-container">
-      <div className="logo-container">
-        {/* icon has been imported at the top */}
-        <Avatar src={icon} size="large" />
-        <Typography.Title level={2} className="logo">
-          {/* Routing to HomePage */}
-          <Link to="/">InfoCrypto</Link>
-        </Typography.Title>
+      <div className=" text-white p-4 flex justify-between items-center">
+        <div className="flex items-center ">
+          <Link to="/" className=" font-semibold text-xl">
+            InfoCrypto
+          </Link>
+        </div>
+
+        {/* Mobile menu toggle button */}
+        <button onClick={toggleMenu} className="lg:hidden">
+          {isMenuOpen ? (
+            <MenuIcon className="w-6 h-6" />
+          ) : (
+            <MenuIcon className="w-6 h-6" />
+          )}
+        </button>
       </div>
-      {/* menu and menu items are styling from antd */}
-      <Item theme="dark">
-        {/* all menu items must be wrapped in Menu then wrapped
-        in item */}
-        <Menu>
-          <MenuItem icon={<HomeOutlined />}>
-            <Link to="/">Home</Link>
-          </MenuItem>
-          <MenuItem icon={<FundOutlined />}>
-            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-          </MenuItem>
-          <MenuItem icon={<MoneyCollectOutlined />}>
-            <Link to="/exchanges">Exchanges</Link>
-          </MenuItem>
-          <MenuItem icon={<BulbOutlined />}>
-            <Link to="/news">News</Link>
-          </MenuItem>
-        </Menu>
-      </Item>
+
+      <div
+        className={`flex-col   md:flex md:space-x-4 ${
+          isMenuOpen ? "block" : "hidden"
+        }`}
+      >
+        <Link to="/" className="nav-item">
+          <HomeIcon className="w-6 h-6" />
+          <span>Home</span>
+        </Link>
+        <Link to="/cryptocurrencies" className="nav-item">
+          <AttachMoneyIcon className="w-6 h-6" />
+          <span>Cryptocurrencies</span>
+        </Link>
+        <Link to="/exchanges" className="nav-item">
+          <BarChartIcon className="w-6 h-6" />
+          <span>Exchanges</span>
+        </Link>
+        <Link to="/news" className="nav-item">
+          <LightbulbIcon className="w-6 h-6" />
+          <span>News</span>
+        </Link>
+      </div>
     </div>
   );
 };
