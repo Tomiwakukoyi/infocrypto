@@ -5,7 +5,6 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import HomeIcon from "@mui/icons-material/Home";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import icon from "../images/cryptocurrency.png";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -15,10 +14,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="nav-container">
-      <div className=" text-white p-4 flex justify-between items-center">
+    <div className="  bg-purple-900 md:h-full">
+      <div className="  p-4 flex justify-between items-center">
         <div className="flex items-center ">
-          <Link to="/" className=" font-semibold text-xl">
+          <Link
+            to="/"
+            style={{ fontFamily: "Permanent Marker" }}
+            className=" text-white font-white mt-7 text-lg ray 3"
+          >
             InfoCrypto
           </Link>
         </div>
@@ -34,25 +37,31 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`flex-col   md:flex md:space-x-4 ${
+        className={`flex-col items-center justify-center md:flex md:gap-5  ${
           isMenuOpen ? "block" : "hidden"
         }`}
       >
-        <Link to="/" className="nav-item">
-          <HomeIcon className="w-6 h-6" />
-          <span>Home</span>
+        <Link to="/" className="nav-item flex items-center justify-center">
+          <HomeIcon className="w-6 h-6 text-slate-900" />
+          <span className=" text-white hover:text-gray-300">Home</span>
         </Link>
-        <Link to="/cryptocurrencies" className="nav-item">
-          <AttachMoneyIcon className="w-6 h-6" />
-          <span>Cryptocurrencies</span>
+        <Link
+          to="/cryptocurrencies"
+          className="nav-item flex items-center justify-center"
+        >
+          <AttachMoneyIcon className="w-6 h-6 text-slate-900" />
+          <span className=" text-white hover:text-gray-300">Cryptos</span>
         </Link>
-        <Link to="/exchanges" className="nav-item">
-          <BarChartIcon className="w-6 h-6" />
-          <span>Exchanges</span>
+        <Link
+          to="/exchanges"
+          className="nav-item flex items-center justify-center"
+        >
+          <BarChartIcon className="w-6 h-6 text-slate-900" />
+          <span className=" text-white hover:text-gray-300">Exchanges</span>
         </Link>
-        <Link to="/news" className="nav-item">
-          <LightbulbIcon className="w-6 h-6" />
-          <span>News</span>
+        <Link to="/news" className="nav-item flex items-center justify-center ">
+          <LightbulbIcon className="w-6 h-6 text-slate-900" />
+          <span className=" text-white hover:text-gray-300">News</span>
         </Link>
       </div>
     </div>
