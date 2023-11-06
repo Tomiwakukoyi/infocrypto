@@ -63,8 +63,8 @@ const Homepage = () => {
       <div className="flex items-center justify-between mx-2 mt-4 md:mt-8 md:space-y-4">
         <h2 className="text-lg font-bold">Latest Crypto News</h2>
         <div className="flex items-center justify-between">
-          <h3 className="">
-            <Link to="/news" className="text-purple-300">
+          <h3 className=" hover:text-purple-800">
+            <Link to="/news" className="text-purple-300 ">
               Show More
             </Link>
           </h3>
