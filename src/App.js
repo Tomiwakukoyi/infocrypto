@@ -41,22 +41,23 @@ const App = () => {
           </div>
         </Layout>
 
-        <div className="footer">
+        {/* footer */}
+        {/* <div className="footer">
           <Typography.Title
             level={5}
             style={{ color: "white", textAlign: "center" }}
           >
             Infocrypto <br />
             All rights reserved
-          </Typography.Title>
-          {/* space is antdesigns way of saying this is a 
+          </Typography.Title> */}
+        {/* space is antdesigns way of saying this is a 
         div but we need space btw the items */}
-          <Space>
+        {/* <Space>
             <Link to="/">Home</Link>
             <Link to="/exchanges">Exchanges</Link>
             <Link to="/news">News</Link>
           </Space>
-        </div>
+        </div> */}
       </div>
     </div>
   );
