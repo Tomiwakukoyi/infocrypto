@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/material": "^5.14.16",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +15,7 @@
     "antd": "^4.23.2",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
+    "framer-motion": "^10.16.4",
     "html-react-parser": "^3.0.4",
     "millify": "^5.0.1",
     "moment": "^2.29.4",
@@ -21,6 +26,7 @@
     "react-router": "^6.4.0",
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
+    "react-spring": "^9.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5"
   }
 }

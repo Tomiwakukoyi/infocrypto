@@ -1,85 +1,77 @@
 import React from "react";
-// the package thall format numbers
 import millify from "millify";
-import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
 
-//to destructure the title so we can write Title straight
-//instead of writing Typography.Title
-const { Title } = Typography;
-
 const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
 
-  //a syntax to get into the data object then get the stats
-  //globalStats is then used to access the needed data below
   const globalStats = data?.data?.stats;
 
   if (isFetching) return "loading...";
-  return (
-    <>
-      <Title level={2} className="heading">
-        Global Crypto Stats
-      </Title>
-      <Row>
-        {/* in ant design, theres 24 spaces soo span of 12 will be 
-        taking up half the screen */}
-        <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
-        </Col>
 
-        {/* millify is used to write the numbers in readable format*/}
-        <Col span={12}>
-          <Statistic
-            title="Total Exchanges"
-            value={millify(globalStats.totalExchanges)}
-          />
-        </Col>
-        <Col span={12}>
-          <Statistic
-            title="Total Market Cap"
-            value={millify(globalStats.totalMarketCap)}
-          />
-        </Col>
-        <Col span={12}>
-          <Statistic
-            title="Total 24Hr Volume"
-            value={millify(globalStats.total24hVolume)}
-          />
-        </Col>
-        <Col span={12}>
-          <Statistic
-            title="Total Markets"
-            value={millify(globalStats.totalMarkets)}
-          />
-        </Col>
-      </Row>
-      {/* the first section of our home page*/}
-      <div className="home-heading-container">
-        <Title level={2} className="home-title">
+  return (
+    <div className=" pl-8">
+      <h2 className="text-2xl font-medium mt-10">Global Crypto Stats</h2>
+      <div className="md:grid flex flex-wrap gap-x-5 gap-y-4 items-center md:grid-cols-2 md:gap-4 md:mt-3">
+        <div>
+          <div className="text text-gray-400">Total Cryptocurrencies</div>
+          <div className=" text-lg md:text-2xl">{globalStats.total}</div>
+        </div>
+        <div>
+          <div className="text text-gray-400">Total Exchanges</div>
+          <div className=" text-lg md:text-2xl">
+            {millify(globalStats.totalExchanges)}
+          </div>
+        </div>
+        <div>
+          <div className="text text-gray-400">Total Market Cap</div>
+          <div className=" text-lg md:text-2xl">
+            {millify(globalStats.totalMarketCap)}
+          </div>
+        </div>
+        <div>
+          <div className="text text-gray-400">Total 24Hr Volume</div>
+          <div className=" text-lg md:text-2xl">
+            {millify(globalStats.total24hVolume)}
+          </div>
+        </div>
+        <div>
+          <div className="text text-gray-400">Total Markets</div>
+          <div className=" text-lg md:text-2xl">
+            {millify(globalStats.totalMarkets)}
+          </div>
+        </div>
+      </div>
+
+      <div className="md:mt-8 mt-6 flex items-center justify-center gap-8 md:justify-between mx-0 md:mx-3">
+        <h2 className=" text-lg md:text-2xl font-semibold">
           Top 10 Cryptocurrencies in the world
-        </Title>
-        <Title level={3} className="show-more">
-          <Link to="/cryptocurrencies">Show More</Link>
-        </Title>
+        </h2>
+        <div className="flex items-center ">
+          <h3 className="  md:text-xl ">
+            <Link to="/cryptocurrencies" className="text-purple-800">
+              Show More
+            </Link>
+          </h3>
+        </div>
       </div>
       <Cryptocurrencies simplified />
-      {/* simplified will help us show only 10 and not more than that*/}
-      {/* the second section of our home page*/}
 
-      <div className="home-heading-container">
-        <Title level={2} className="home-title">
-          Latest Crypto News
-        </Title>
-        <Title level={3} className="show-more">
-          <Link to="/news">Show More</Link>
-        </Title>
+      <div className="flex items-center justify-between mx-2 mt-4 md:mt-8 md:space-y-4">
+        <h2 className="text-lg font-bold">Latest Crypto News</h2>
+        <div className="flex items-center justify-between">
+          <h3 className=" hover:text-purple-800">
+            <Link to="/news" className="text-purple-300 ">
+              Show More
+            </Link>
+          </h3>
+        </div>
       </div>
       <News simplified />
-    </>
+    </div>
   );
 };
 
