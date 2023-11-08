@@ -1,12 +1,7 @@
-import React from "react";
-import { Select, Typography, Row, Col, Avatar, Card } from "antd";
-import moment from "moment";
+import React, { useState } from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
-import { useState } from "react";
 import { useGetCryptosQuery } from "../services/cryptoApi";
-
-const { Text, Title } = Typography;
-const { Option } = Select;
+import moment from "moment";
 
 const demoImage =
   "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
@@ -19,77 +14,62 @@ const News = ({ simplified }) => {
     count,
   });
   const { data } = useGetCryptosQuery(100);
-  if (!cryptoNews?.value) return "loading....";
+
+  if (!cryptoNews?.value) return "Loading...";
+
   return (
-    <Row gutter={[24, 24]}>
-      {/* if theres no simplified, render the followinng code */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {!simplified && (
-        <Col span={24}>
-          <Select
-            showSearch
-            className="select-news"
+        <div className="col-span-full">
+          <select
+            className="w-full p-2 bg-gray-200 rounded"
             placeholder="Select a crypto"
-            optionFilterProp="children"
-            onChange={(value) => setNewsCategory(value)}
-            //this is filtering the options so it shows the one of the selected crypto
-            filterOption={(input, option) =>
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
+            onChange={(e) => setNewsCategory(e.target.value)}
           >
-            <Option value="Cryptocurrency"></Option>
+            <option value="Cryptocurrency"></option>
             {data?.data?.coins.map((coin) => (
-              <Option value={coin.name}>{coin.name}</Option>
+              <option value={coin.name}>{coin.name}</option>
             ))}
-          </Select>
-        </Col>
+          </select>
+        </div>
       )}
       {cryptoNews.value.map((news, i) => (
-        //xs is xtra small one col, sm is small2cols, lg large 4 cols
-        //key is equal to the index of the array were mapping over
-        <Col xs={24} sm={12} lg={8} key={i}>
-          <Card hoverable className="news-card">
-            <a href={news.url} target="_blank" rel="noreferrer">
-              <div className="news-image-container">
-                <Title className="news-title" level={4}>
-                  {news.name}
-                </Title>
+        <div className="bg-white rounded p-4 shadow-md" key={i}>
+          <a href={news.url} target="_blank" rel="noreferrer">
+            <div className="mb-4">
+              <h4 className="  font-bold">{news.name}</h4>
+              <img
+                src={news?.image?.thumbnail?.contentUrl || demoImage}
+                alt="news"
+                className="w-full h-auto"
+              />
+            </div>
+            <p className="text-gray-600">
+              {news.description.length > 100
+                ? `${news.description.substring(0, 100)}...`
+                : news.description}
+            </p>
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center space-x-2">
                 <img
-                  src={news?.image?.thumbnail?.contentUrl || demoImage}
-                  alt="news"
+                  src={
+                    news.provider[0]?.image?.thumbnail?.contentUrl || demoImage
+                  }
+                  alt=""
+                  className="w-8 h-8 bg-gray-300 rounded-full"
                 />
+                <span className="text-gray-700 text-xs">
+                  {news.provider[0]?.name}
+                </span>
               </div>
-              <p>
-                {/* if news.description is longer than 100 characters
-                render a news.description.substring(0,100) meaning first 100 characters
-                then the ... at the end to signify theres more and if its less than 100 just render news.description */}
-                {news.description > 100
-                  ? `${news.description.substring(0, 100)}...`
-                  : news.description}
-              </p>
-              <div className="provider-container">
-                <div>
-                  <Avatar
-                    src={
-                      news.provider[0]?.image?.thumbnail?.contentUrl ||
-                      demoImage
-                    }
-                    alt=""
-                  />
-                  <Text className="provider-name">
-                    {news.provider[0]?.name}
-                  </Text>
-                </div>
-                {/* this text will be the timestamp so we use the moment library */}
-                <Text>
-                  {/* moment then the news.datePublished for the date then startOf as begining then from now as in when */}
-                  {moment(news.datePublished).startOf("ss").fromNow()}
-                </Text>
-              </div>
-            </a>
-          </Card>
-        </Col>
+              <span className="text-gray-500">
+                {moment(news.datePublished).fromNow()}
+              </span>
+            </div>
+          </a>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 

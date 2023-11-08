@@ -1,47 +1,117 @@
-import React from "react";
-import { Button, Menu, Typography, Avatar } from "antd";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  HomeOutlined,
-  MoneyCollectOutlined,
-  BulbOutlined,
-  FundOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
-import icon from "../images/cryptocurrency.png";
-import Item from "antd/lib/list/Item";
-import MenuItem from "antd/lib/menu/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import HomeIcon from "@mui/icons-material/Home";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <div className="nav-container">
-      <div className="logo-container">
-        {/* icon has been imported at the top */}
-        <Avatar src={icon} size="large" />
-        <Typography.Title level={2} className="logo">
-          {/* Routing to HomePage */}
-          <Link to="/">InfoCrypto</Link>
-        </Typography.Title>
+    <div className="  bg-purple-900 h-full ">
+      <div>
+        <div className="  p-4 flex gap-3 md:gap-0 justify-between items-center">
+          <div className="flex items-center hover:text-purple-300 ">
+            <Link
+              to="/"
+              style={{ fontFamily: "Permanent Marker" }}
+              className="  text-white font-white mt-7 text-sm md:text-lg"
+            >
+              InfoCrypto
+            </Link>
+          </div>
+
+          {/* Mobile menu toggle button */}
+          {/* <button onClick={toggleMenu} className="md:hidden">
+            {isMenuOpen ? (
+              <MenuIcon className="w-6 h-6 flex items-center text-white hover:text-purple-300 mt-7" />
+            ) : (
+              <MenuIcon className="w-6 h-6 flex items-center text-white hover:text-purple-300 mt-7" />
+            )}
+          </button> */}
+        </div>
+
+        {/* Mobile navigation */}
+        <div
+          className={`flex md:hidden mt-7 flex-col items-center justify-center gap-10 md:gap-5 ${
+            isMenuOpen ? "block" : "block"
+          }`}
+        >
+          <Link to="/" className="nav-item flex items-center justify-center">
+            <HomeIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white text-xs hover:text-purple-300">
+              Home
+            </span>
+          </Link>
+          <Link
+            to="/cryptocurrencies"
+            className="nav-item flex items-center justify-center"
+          >
+            <AttachMoneyIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white text-xs hover:text-purple-300">
+              Cryptos
+            </span>
+          </Link>
+          <Link
+            to="/exchanges"
+            className="nav-item flex items-center justify-center"
+          >
+            <BarChartIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white text-xs hover:text-purple-300">
+              Exchanges
+            </span>
+          </Link>
+          <Link
+            to="/news"
+            className="nav-item flex items-center justify-center "
+          >
+            <LightbulbIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white text-xs hover:text-purple-300">
+              News
+            </span>
+          </Link>
+        </div>
+
+        {/* Large screen navigation  */}
+        <div
+          className={`hidden md:block mt-7 flex-col items-center justify-center space-y-8  ${
+            isMenuOpen ? "block" : "block"
+          }`}
+        >
+          <Link to="/" className="nav-item flex items-center justify-center">
+            <HomeIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white hover:text-purple-300">Home</span>
+          </Link>
+          <Link
+            to="/cryptocurrencies"
+            className="nav-item flex items-center justify-center"
+          >
+            <AttachMoneyIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white hover:text-purple-300">Cryptos</span>
+          </Link>
+          <Link
+            to="/exchanges"
+            className="nav-item flex items-center justify-center"
+          >
+            <BarChartIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white hover:text-purple-300">Exchanges</span>
+          </Link>
+          <Link
+            to="/news"
+            className="nav-item flex items-center justify-center "
+          >
+            <LightbulbIcon className="hover:text-purple-300 w-6 h-6 text-slate-900" />
+            <span className="text-white hover:text-purple-300">News</span>
+          </Link>
+        </div>
       </div>
-      {/* menu and menu items are styling from antd */}
-      <Item theme="dark">
-        {/* all menu items must be wrapped in Menu then wrapped
-        in item */}
-        <Menu>
-          <MenuItem icon={<HomeOutlined />}>
-            <Link to="/">Home</Link>
-          </MenuItem>
-          <MenuItem icon={<FundOutlined />}>
-            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-          </MenuItem>
-          <MenuItem icon={<MoneyCollectOutlined />}>
-            <Link to="/exchanges">Exchanges</Link>
-          </MenuItem>
-          <MenuItem icon={<BulbOutlined />}>
-            <Link to="/news">News</Link>
-          </MenuItem>
-        </Menu>
-      </Item>
     </div>
   );
 };
