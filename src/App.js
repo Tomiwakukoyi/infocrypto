@@ -1,6 +1,6 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { Layout, Typography, Space } from "antd";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "antd";
 import {
   Navbar,
   Exchanges,
@@ -9,56 +9,64 @@ import {
   News,
   CryptoDetails,
 } from "./components";
+import { Puff } from "react-loader-spinner"; // Import the loader component
 import "./App.css";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a 5-second loading delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="app">
-      <div className="navbar">
-        <Navbar />
-      </div>
-      <div className="main">
-        {/* Layout is a component from antdesign that
-        basically lays everything out */}
-        <Layout>
-          <div className="routes">
-            {/* the switch component is coming from react-router-dom */}
-            {/**switch allos us create multiple routews */}
-            <Routes>
-              {/* the 'exact' means it will only be triggered if yougo exactly to that
-              url */}
-              <Route exact path="/" element={<Homepage />} />
-
-              <Route exact path="/exchanges" element={<Exchanges />} />
-              <Route
-                exact
-                path="/cryptocurrencies"
-                element={<Cryptocurrencies />}
-              />
-              <Route exact path="/crypto/:coinId" element={<CryptoDetails />} />
-              <Route exact path="/news" element={<News />} />
-            </Routes>
+      {loading ? (
+        // Display the loading animation here
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <Puff type="Puff" color="purple" height={100} width={100} />
+        </div>
+      ) : (
+        // Your main content here
+        <div>
+          <div className="navbar">
+            <Navbar />
           </div>
-        </Layout>
-
-        {/* footer */}
-        {/* <div className="footer">
-          <Typography.Title
-            level={5}
-            style={{ color: "white", textAlign: "center" }}
-          >
-            Infocrypto <br />
-            All rights reserved
-          </Typography.Title> */}
-        {/* space is antdesigns way of saying this is a 
-        div but we need space btw the items */}
-        {/* <Space>
-            <Link to="/">Home</Link>
-            <Link to="/exchanges">Exchanges</Link>
-            <Link to="/news">News</Link>
-          </Space>
-        </div> */}
-      </div>
+          <div className="main">
+            <Layout>
+              <div className="routes">
+                <Routes>
+                  <Route exact path="/" element={<Homepage />} />
+                  <Route exact path="/exchanges" element={<Exchanges />} />
+                  <Route
+                    exact
+                    path="/cryptocurrencies"
+                    element={<Cryptocurrencies />}
+                  />
+                  <Route
+                    exact
+                    path="/crypto/:coinId"
+                    element={<CryptoDetails />}
+                  />
+                  <Route exact path="/news" element={<News />} />
+                </Routes>
+              </div>
+            </Layout>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
